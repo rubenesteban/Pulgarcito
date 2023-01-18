@@ -46,7 +46,7 @@ fun GameScreen(
                 .padding(start = 8.dp),
             onClick = { scope.launch {
 
-                viewModel.Skott()
+                viewModel.hola()
 
             } }
         ) {
@@ -58,12 +58,11 @@ fun GameScreen(
 
             // MasTaskList(list = email)
             //MasTaskList(list = UserGuess)
+
+
             WellnesTaskList(list = viewModel.tasks,
-                onCloseTask = {task -> viewModel.remove(task)},
-                onAddTask = {task -> viewModel.gult(task)})
-            WellnesTaskList(list = gameUiState,
-                onCloseTask = {gameUiState -> viewModel.gilf(gameUiState)},
-                onAddTask = {gameUiState -> viewModel.gilf(gameUiState)})
+                onCloseTask = {gol -> viewModel.remove(gol)},
+                onAddTask = {gol -> viewModel.gult(gol)})
 
         }
 

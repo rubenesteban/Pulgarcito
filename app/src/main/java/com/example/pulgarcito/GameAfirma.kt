@@ -23,8 +23,8 @@ fun WellnesTaskList(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = Modifier) {
-        items(items = list, key = { task -> task.id }) { task ->
-            wellnessTaskItem(taskName = task.label, onClose = { onCloseTask(task) }, onAdd = { onCloseTask(task) })
+        items(items = list, key = { gol -> gol.id }) { gol ->
+            wellnessTaskItem(taskName = gol.label, onClose = { onCloseTask(gol) }, onAdd = { onCloseTask(gol)})
         }
     }
 }
