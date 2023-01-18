@@ -1,22 +1,21 @@
 package com.example.pulgarcito
 
 import android.util.Log
-import androidx.compose.runtime.snapshots.MutableSnapshot
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.pulgarcito.GameViewModel.julian.libre
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 
 class GameViewModel() : ViewModel() {
 
     private val _punto = MutableStateFlow(traeMixelPunto())
     val punto: StateFlow<List<Mixtel>> = _punto.asStateFlow()
+
+    //private val _uiState = MutableStateFlow(GameUiState())
+    val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
 
     //private var UsaWord: Set<String> = getallWords().toMutableSet()
     private var Words: MutableSet<String> = mutableSetOf<String>("")
@@ -41,12 +40,17 @@ class GameViewModel() : ViewModel() {
     val tasks: List<Affirmation>
         get() = _tasks
     //_________________________________________________
+    private val _juca = traeMixelPunto().toMutableStateList()
+    val juca: List<Mixtel>
+        get() = _juca
 
     //--------------------------
     private val _wrap = getWellnessTasks().toMutableStateList()
     val wrap: List<WellnessTask>
         get() = _wrap
     //_________________________________________________
+
+    data class Mix(val label: String)
 
     //_________________________________________________
 
@@ -65,7 +69,7 @@ class GameViewModel() : ViewModel() {
     lateinit var toronja: List<WellnessTask>
     lateinit var naranja: List<Mixtel>
     lateinit var pera: List<Mixtel>
-    lateinit var pina: List<Mixtel>
+    lateinit var pina: MutableList<Affirmation>
     lateinit var platano: List<Mixtel>
     lateinit var mas: MutableSet<String>
     lateinit var holdirt: MutableSet<String>
@@ -78,8 +82,11 @@ class GameViewModel() : ViewModel() {
     }
 
     fun remove(item: Affirmation) {
-        _tasks.remove(item)
-        Log.d(TAG, " it - $tasks")
+        var jul = _tasks.remove(item)
+        val Ago = _tasks.add(item)
+        Log.d(TAG, " it - $Ago")
+        val hill = tasks.toMutableList()
+        Log.d(TAG, " it - $hill")
         //gult(item)
     }
 
@@ -88,22 +95,17 @@ class GameViewModel() : ViewModel() {
         //gult(item)
     }
 
-
-    //------------Addclose
-    fun gult(item: Affirmation): MutableSet<String> {
-        Trabajo = waffers(item)
-        Log.d(TAG, " it - $Trabajo")
-        // naranja = punto + pina
-        return Trabajo
+    fun remove(item: Mixtel) {
+        _juca.remove(item)
 
     }
 
-    fun gilf(item: Mixtel): MutableSet<String> {
-        //again = listOf(punto.random())
-        // neco = _punto.add(item).toString()
-        mas.add(neco)
-        return mas
+    //------------Addclose
 
+    fun gilf(item: Mixtel): MutableSet<String> {
+        val fu = item.label
+        Work.add(fu)
+        return Work
     }
 
     fun golf(item: WellnessTask): MutableSet<String> {
@@ -115,14 +117,15 @@ class GameViewModel() : ViewModel() {
     }
 
     fun hola(){
-        Log.d(TAG, " it - $libre")
+        Log.d(TAG, " it - $pina")
     }
 
-    fun waffers(item: Affirmation): MutableSet<String> {
-        Work = listOf(item) as MutableSet<String>
-        Words.add(Work.toString())
-        Log.d(TAG, " it - $Words")
-        return Words
+    fun waffers(item: Affirmation): Boolean {
+        var tolss = _tasks.add(item)
+        val litio = _tasks.toMutableList() as MutableSet<*>
+        val tjjjss = (_wrap + litio) as MutableSet<*>
+        Log.d(TAG, " it - $tjjjss")
+        return tolss
     }
 
 
@@ -139,18 +142,6 @@ class GameViewModel() : ViewModel() {
     private fun traeMixelPunto(): List<Mixtel> {
         return listOf<Mixtel>(
             Mixtel(111, "Angel"),
-            Mixtel(112, "Manta"),
-            Mixtel(123, "Hugo"),
-            Mixtel(114, "Guol"),
-            Mixtel(115, "Nulota"),
-            Mixtel(116, "Miercoles"),
-            Mixtel(117, "Jueves"),
-            Mixtel(118, "Viernes"),
-            Mixtel(119, "Sabado"),
-            Mixtel(120, "Domingo"),
-            Mixtel(121, "Marta"),
-            Mixtel(122, "Miguel"),
-
             )
     }
 
@@ -159,7 +150,7 @@ class GameViewModel() : ViewModel() {
 
 
 
-
+//data class Mix(val label: String)
 data class Mixtel(val id: Int, val label: String)
 data class WellnessTask(val id: Int, val label: String)
 data class Affirmation(val id: Int, val label: String)

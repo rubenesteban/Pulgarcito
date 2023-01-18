@@ -46,7 +46,7 @@ fun GameScreen(
                 .padding(start = 8.dp),
             onClick = { scope.launch {
 
-                viewModel.hola()
+               // viewModel.hola()
 
             } }
         ) {
@@ -60,9 +60,13 @@ fun GameScreen(
             //MasTaskList(list = UserGuess)
 
 
-            WellnesTaskList(list = viewModel.tasks,
+            WellnesTaskList(list = viewModel.juca,
                 onCloseTask = {gol -> viewModel.remove(gol)},
-                onAddTask = {gol -> viewModel.gult(gol)})
+                onAddTask = {gol -> viewModel.gilf(gol)})
+
+            WellnesTaskList(list = gameUiState,
+                onCloseTask = {gameUiState -> viewModel.remove(gameUiState)},
+                onAddTask = {gameUiState -> viewModel.gilf(gameUiState)})
 
         }
 
